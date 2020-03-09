@@ -4,6 +4,8 @@ This is a project Laravel tested in Ubuntu/Nginx and Xampp environments.
 Frontend in Blade Template and Backend Laravel.
 Beside, it implements a REST API with some routes in order to link to some frontend application.
 
+#### It is a little Library application. The goal is to control the loan of books.
+
 ## How to execute this project Laravel
 ### Xampp
 

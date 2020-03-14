@@ -52,7 +52,7 @@ cd [nome_projeto]
 
 composer install (to install dependencies. "php artisan" doesn't work without this step)  
 
-Rename .env.example in project folder to .env
+Rename .env.example in project folder to .env  
 php artisan key generate (this step create an API_KEY inside .env file. It's important)  
 
 php artisan serve

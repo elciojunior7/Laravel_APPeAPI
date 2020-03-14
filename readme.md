@@ -39,10 +39,10 @@ sudo nano /etc/nginx/sites-enabled/default
 
 ## How to create a project (It's not necessary doing this step. The project is already done, just clone it)
 
-> laravel new [nome_projeto]
+> laravel new [project_name]
 
 OR
-> composer create-project --prefer-dist laravel/laravel [nome_projeto]
+> composer create-project --prefer-dist laravel/laravel [project_name]
 
 ## How to execute laravel project
 

@@ -37,7 +37,7 @@ chmod +x /usr/local/bin/composer
 sudo apt-get install nano
 sudo nano /etc/nginx/sites-enabled/default
 
-## How to create a project (this case is not necessary do this, the project is already done. Just clone it)
+## How to create a project (In this case is not necessary do this, the project is already done. Just clone it)
 
 laravel new [nome_projeto]
 OU

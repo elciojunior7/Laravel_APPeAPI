@@ -53,9 +53,10 @@ cd [nome_projeto]
 composer install (to install dependencies. "php artisan" doesn't work without this step)  
 
 Renaming .env.example in project folder to .env  
-> php artisan key:generate (this step create an APP_KEY inside .env file. It's important)  
+> php artisan key:generate (this step create an APP_KEY inside .env file. It's important)
+
 Edit the following lines in .env file:  
-DB_CONNECTION=(your DB)  
+> DB_CONNECTION=(your DB)  
 DB_PORT=3306(your DB port)  
 DB_DATABASE=(your DB schema)  
 DB_USERNAME=(your DB username)  

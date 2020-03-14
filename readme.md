@@ -46,7 +46,9 @@ composer create-project --prefer-dist laravel/laravel [nome_projeto]
 ## How to execute laravel project
 Windows (accessing Xampp htdocs folder)
 Ubuntu (accessing /var/www/html)
+
 ...Then...
 
 cd [nome_projeto]
+
 php artisan serve

@@ -52,7 +52,17 @@ cd [nome_projeto]
 
 composer install (to install dependencies. "php artisan" doesn't work without this step)  
 
-Rename .env.example in project folder to .env  
-php artisan key:generate (this step create an API_KEY inside .env file. It's important)  
+Renaming .env.example in project folder to .env  
+> php artisan key:generate (this step create an APP_KEY inside .env file. It's important)  
+Edit the following lines in .env file:  
+DB_CONNECTION=(your DB)  
+DB_PORT=3306(your DB port)  
+DB_DATABASE=(your DB schema)  
+DB_USERNAME=(your DB username)  
+DB_PASSWORD=(your DB password)  
+AUTH_API_TOKEN=(a password to access the API)
+
+There is a configuration example in .env.txt file. The example uses MySql as DB.  
+DON'T change the line APP_KEY that you just created in .env.
 
 php artisan serve

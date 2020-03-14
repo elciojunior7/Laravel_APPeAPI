@@ -64,6 +64,6 @@ DB_PASSWORD=(your DB password)
 AUTH_API_TOKEN=(a password to access the API)
 
 There is a configuration example in .env.txt file. The example uses MySql as DB.  
-DON'T change the line APP_KEY that you just created in .env.
+DON'T change the APP_KEY line that you just created in .env.
 
 > php artisan serve

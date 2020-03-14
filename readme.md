@@ -51,6 +51,6 @@ Ubuntu (accessing /var/www/html)
 
 cd [nome_projeto]
 
-composer install (to install dependencies. "php artisan" doesn't work without this install)
+composer install (to install dependencies. "php artisan" doesn't work without this step)
 
 php artisan serve

@@ -39,7 +39,7 @@
                         </div>
 
                         <div class="form-group">
-                            <img src="/images/book/{{ $book->image }}"  width="10%" />
+                            <img src="/storage/book/{{ $book->image }}"  width="10%" />
                             <input type="hidden" name="deleteimage" value="{{ $book->image }}">
                         </div>
                         <div class="control-group">

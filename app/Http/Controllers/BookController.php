@@ -7,10 +7,11 @@ use App\Models\Book;
 use App\Models\Lending;
 use App\Models\Author;
 use Validator;
+use Storage;
 
 class BookController extends Controller
 {
-    private $path= 'images/book';
+    private $path= '/storage/book/';
 
      public function __construct()
     {
@@ -28,7 +29,7 @@ class BookController extends Controller
     {
         //selec * from books
         $books= Book::paginate(10);
-        return view('book.index', compact('books'));
+        return view('book.index', compact('books', 'path'));
     }
 
     //cria a view para visualizar
@@ -55,11 +56,16 @@ class BookController extends Controller
         }
         //dd mata a aplicação e formata  e mostra conteudo da variaver
         //dd(variavel);
-        if (!empty($request->file('image')) && $request->file('image')->isValid()) {
+        
+        $imageFile = $request->file('image');
+        if (!empty($imageFile) && $imageFile->isValid()) {
            //crio um nome para o arquivo timestamp + a extensao do arqui 
-            $fileName = time().'.'.$request->file('image')->getClientOriginalExtension();
-            //move o arquivo da pasta temporaria e move para o servidor com o novo nome
-            $request ->file('image')->move($this->path,$fileName);
+            $fileName = time().'.'.$imageFile->getClientOriginalExtension();
+            //move o arquivo da pasta temporaria e move para o servidor com o novo nome 
+            //$imageFile->move($this->path,$fileName);
+
+             //move o arquivo para pasta storage do servidor
+            Storage::disk("book")->put($fileName, file_get_contents($imageFile));
         }else{
             $fileName = null;
         }
@@ -118,7 +124,7 @@ class BookController extends Controller
         $book = Book::find($id);
         if(!empty( $book ))
         {
-            if(!empty($request->file('image')) && $request->file('image')->isValid()){
+            /*if(!empty($request->file('image')) && $request->file('image')->isValid()){
                 if(!empty($request->input('deleteimage')) && file_exists($this->path . '/' . $request->input('deleteimage'))){
                     unlink($this->path . '/' . $request->input('deleteimage'));
                 }
@@ -126,6 +132,20 @@ class BookController extends Controller
                 $fileName = time() . '.' . $request->file('image')->getClientOriginalExtension();
 
                 $request->file('image')->move($this->path,$fileName);
+            }*/
+
+            $imageFile = $request->file('image');
+            $deletedFile = $request->input('deleteimage');
+            if (!empty($imageFile) && $imageFile->isValid()) {
+                
+                if(!empty($deletedFile) && Storage::disk("book")->exists($deletedFile)) {
+                    Storage::disk("book")->delete($deletedFile);
+                }
+               //crio um nome para o arquivo timestamp + a extensao do aqui 
+                $fileName = time().'.'.$imageFile->getClientOriginalExtension();
+                
+                 //move o arquivo para pasta storage do servidor
+                Storage::disk("book")->put($fileName, file_get_contents($imageFile));
             }
 
             if(!$fileName){
@@ -166,6 +186,8 @@ class BookController extends Controller
     public function delete( Request $request )
     {
         $id = $request->input('id');
+        $image = $request->input('image');
+        Storage::disk("book")->delete($image);
         $book = Book::find($id);
 
         if($book){

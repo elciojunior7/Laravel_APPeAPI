@@ -36,8 +36,8 @@
                             @foreach($books as $book)
                                 <tr>
                                     <th id="code" scope="row" class="text-center">{{ $book->id }}</th>
-                                    <td class="center ">
-                                        <img onclick="enlargeCover(this)" src="/images/book/{{ $book->image }}" width="100%" style="cursor:pointer" />
+                                    <td id="image" data-image="{{$book->image}}" class="center ">
+                                        <img onclick="enlargeCover(this)" src="{{ '/storage/book/' . $book->image }}" width="100%" style="cursor:pointer" />
                                     </td>
                                     <td id="booktitle">{{ $book->title }}</td>
                                     <td>{{ $book->description }}</td>
@@ -95,19 +95,20 @@
 <script>
     function action(e){ 
         let id = $(e).parent().siblings("#code").html();
-        $("#btnOk").attr("onclick", "remove("+id+")");
+        let image = $(e).parent().siblings("#image").data( "image" );
+        $("#btnOk").attr("onclick", "remove("+id+",'"+image+"')");
         let book = $(e).parent().siblings("#booktitle").html();
         $("#book").html(book);
         $('#indexModal').modal('show');
     }
-    function remove(id){ 
+    function remove(id, image){ 
         $.ajax({
             type: "post",
             url: "{{route('book.delete')}}",
             async: false,
             headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
             dataType: 'json',
-            data : { id: id },
+            data : { id: id, image: image },
             success: function (data) {
                 console.log(data);
                 window.location.href = data.html;

@@ -7,6 +7,7 @@ use App\Models\Author;
 use App\Models\Lending;
 use Illuminate\Http\Request;
 use Validator;
+use Storage;
 
 class ApiController extends Controller{
 
@@ -34,10 +35,11 @@ class ApiController extends Controller{
 	            $request ->file('image')->move($this->path,$fileName);
 	        }else{
 	            $fileName = null;
-	        }*/
-	        $contents = file_get_contents($request->input('image'));
+			}*/
+			$url = $request->input('image');
+	        $contents = file_get_contents($url);
 			$fileName = time() . '.' . substr($url, strrpos($url, ".") + 1);
-			Storage::disk("public")->put($fileName, $contents);
+			Storage::disk("book")->put($fileName, $contents);
 
 	        $book = book::create([
 	            'title' => $request->input('title'),

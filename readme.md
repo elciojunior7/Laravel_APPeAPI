@@ -50,7 +50,7 @@ Windows (accessing Xampp htdocs folder)
 Ubuntu (accessing /var/www/html)
 
 ...Then...  
-> cd [nome_projeto]
+> cd [nome_projeto]  
 composer install (to install dependencies. "php artisan" doesn't work without this step)
 
 Renaming .env.example in project folder to .env  

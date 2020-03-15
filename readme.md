@@ -73,6 +73,11 @@ DON'T change the APP_KEY line that you just created in .env.
 #### Ubuntu
 > sudo /etc/init.d/nginx restart
 
+### Show images created in storage folder
+All images saved using the application are in storage folder. For instance, images saved as book cover.
+To access this folder is necessary using this:
+> php artisan storage:link
+
 ## Database
 
 It's necessary to create a schema in DB according to DB configurations in .env.

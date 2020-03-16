@@ -29,7 +29,7 @@ class BookController extends Controller
     {
         //selec * from books
         $books= Book::paginate(10);
-        return view('book.index', compact('books', 'path'));
+        return view('book.index', compact('books'));
     }
 
     //cria a view para visualizar

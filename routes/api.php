@@ -21,4 +21,5 @@ Route::middleware("auth.token")->prefix("/v1")->
 	group(function(){
 	Route::get("books","Api\\ApiController@books");
 	Route::post("saveBooks","Api\\ApiController@saveBooks");
+	Route::get("authors","Api\\ApiController@authors");
 });

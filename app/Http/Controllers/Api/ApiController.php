@@ -16,6 +16,12 @@ class ApiController extends Controller{
 		$books = Book::with(['authors','lendings'])->get();
 		return response()->json($books);
 	}
+	
+	public function authors()
+    {
+        $authors= Author::get();
+        return response()->json($authors);
+    }
 
 	public function saveBooks(Request $request){
 

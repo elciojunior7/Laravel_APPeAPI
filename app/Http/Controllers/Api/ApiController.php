@@ -25,7 +25,14 @@ class ApiController extends Controller{
 
 	public function saveBooks(Request $request){
 
-		$validator = Validator::make($request->all(),[
+		//$request->file('file')->getClientOriginalName());
+		//return response()->json($request->input('book'));
+
+		$b = new Book();
+		$b = json_decode($request->input('book'));
+		return response()->json($b->toArray());
+
+		$validator = Validator::make(json_decode($request->input('book')),[
             'title' => 'required',
             'authors' => 'required',
         ],[
@@ -33,16 +40,17 @@ class ApiController extends Controller{
         ],[
             'title' => 'Título',
             'authors' => 'Autores',
-        ]);
+		]);
 
         if($validator->passes()){
+			return response()->json($request->input('title'));
 	        /*if (!empty($request->file('image')) && $request->file('image')->isValid()) {
 	            $fileName = time().'.'.$request->file('image')->getClientOriginalExtension();
 	            $request ->file('image')->move($this->path,$fileName);
 	        }else{
 	            $fileName = null;
 			}*/
-			$url = $request->input('image');
+			$url = $request->input('title');
 	        $contents = file_get_contents($url);
 			$fileName = time() . '.' . substr($url, strrpos($url, ".") + 1);
 			Storage::disk("book")->put($fileName, $contents);

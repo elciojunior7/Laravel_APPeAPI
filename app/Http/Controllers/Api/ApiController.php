@@ -29,10 +29,9 @@ class ApiController extends Controller{
 		//return response()->json($request->input('book'));
 
 		$b = new Book();
-		$b = json_decode($request->input('book'));
-		return response()->json($b->toArray());
+		$arrBook = $b->objectToArray(json_decode($request->input('book')), $request->file('file'));
 
-		$validator = Validator::make(json_decode($request->input('book')),[
+		$validator = Validator::make($arrBook,[
             'title' => 'required',
             'authors' => 'required',
         ],[
@@ -43,25 +42,27 @@ class ApiController extends Controller{
 		]);
 
         if($validator->passes()){
-			return response()->json($request->input('title'));
 	        /*if (!empty($request->file('image')) && $request->file('image')->isValid()) {
 	            $fileName = time().'.'.$request->file('image')->getClientOriginalExtension();
 	            $request ->file('image')->move($this->path,$fileName);
 	        }else{
 	            $fileName = null;
 			}*/
-			$url = $request->input('title');
-	        $contents = file_get_contents($url);
-			$fileName = time() . '.' . substr($url, strrpos($url, ".") + 1);
-			Storage::disk("book")->put($fileName, $contents);
+
+			if (!empty($arrBook['image']) && $arrBook['image']->isValid()) {
+				$fileName = time().'.'.$arrBook['image']->getClientOriginalExtension();
+				Storage::disk("book")->put($fileName, file_get_contents($arrBook['image']));
+			}else{
+				$fileName = null;
+			}
 
 	        $book = book::create([
-	            'title' => $request->input('title'),
-	            'description' => $request->input('description'),
+	            'title' => $arrBook['title'],
+	            'description' => $arrBook['description'],
 	            'image' =>$fileName
 	        ]);
 
-	        $authors = $request->input('authors');
+	        $authors = $arrBook['authors'];
 	        if (!empty($authors))
 	        {
 	            $book->authors()->sync($authors);

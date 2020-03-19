@@ -22,4 +22,7 @@ Route::middleware("auth.token")->prefix("/v1")->
 	Route::get("books","Api\\ApiController@books");
 	Route::post("saveBooks","Api\\ApiController@saveBooks");
 	Route::get("authors","Api\\ApiController@authors");
+	Route::get("editBook/{id}","Api\\ApiController@editBook");
+	Route::post("updateBook/{id}","Api\\ApiController@updateBook");
+	Route::delete("removeBook/{id}","Api\\ApiController@removeBook");
 });

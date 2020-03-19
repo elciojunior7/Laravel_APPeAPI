@@ -188,8 +188,8 @@ class BookController extends Controller
         $id = $request->input('id');
         $image = $request->input('image');
         Storage::disk("book")->delete($image);
-        $book = Book::find($id);
 
+        $book = Book::find($id);
         if($book){
             $book->authors()->detach();
             $book->lendings()->detach();

@@ -25,9 +25,7 @@ class Book extends Model
             $arr['title'] = $book->title;
         if(isset($book->description))
             $arr['description'] = $book->description;
-        if(isset($book->image))
-            $arr['image'] = $book->image;
-        elseif($file)
+        if($file)
             $arr['image'] = $file;
         if(isset($book->authors))
             $arr['authors'] = $book->authors;
